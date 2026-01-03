@@ -2,9 +2,14 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <title>TV Masjid Al-Barkah</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadwal Sholat Masjid Al-Barkah</title>
 
-    <!-- Font Awesome (STABLE & AMAN) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -12,84 +17,83 @@
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
-
   <body>
-    <!-- Header -->
-    <div class="top-bar">
-      <div class="top-left">
-        <i class="fa-solid fa-mosque mosque-icon"></i>
-        <div>
-          <div class="masjid-name">Masjid Al - Barkah</div>
-          <div class="masjid-address">
-            Jalan Pahlawan, Kampung Tengah, Belakang Polsek Cileungsi.
+    <div class="container">
+      <div class="header">
+        <div class="masjid-info">
+          <i class="fa-solid fa-mosque mosque-icon"></i>
+
+          <div class="masjid-text">
+            <h1>Masjid Al - Barkah</h1>
+            <em>Jalan Pahlawan, Kampung Tengah, Belakang Polsek Cileungsi</em>
+          </div>
+        </div>
+
+        <div class="clock-box">
+          <div class="clock-frame">
+            <div class="clock" id="clock">00 : 00 : 00</div>
+          </div>
+          <div class="date" id="date">Memuat tanggal...</div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <em class="hero-text" id="ramadhanCountdown"> Menghitung hari... </em>
+
+        <div class="next-prayer">
+          <span id="nextPrayerName">--</span>
+          <strong id="nextPrayerCountdown">-- : -- : --</strong>
+        </div>
+      </div>
+
+      <div class="prayer-times">
+        <div class="prayer-satu">
+          <p>Subuh</p>
+          <div class="prayer-frame">
+            <span id="subuh">--:--</span>
+          </div>
+        </div>
+        <div class="prayer">
+          <p>Syuruq</p>
+          <div class="prayer-frame">
+            <span id="syuruq">--:--</span>
+          </div>
+        </div>
+        <div class="prayer">
+          <p>Dzuhur</p>
+          <div class="prayer-frame">
+            <span id="dzuhur">--:--</span>
+          </div>
+        </div>
+        <div class="prayer">
+          <p>Ashar</p>
+          <div class="prayer-frame">
+            <span id="asar">--:--</span>
+          </div>
+        </div>
+        <div class="prayer">
+          <p>Maghrib</p>
+          <div class="prayer-frame">
+            <span id="maghrib">--:--</span>
+          </div>
+        </div>
+        <div class="prayer-dua">
+          <p>Isya</p>
+          <div class="prayer-frame">
+            <span id="isya">--:--</span>
           </div>
         </div>
       </div>
 
-      <div class="top-right">
-        <div class="clock-box">
-          <div id="clock">00:00:00</div>
-          <div id="date">Rabu, 21 Desember 2022</div>
+      <div class="footer">
+        <div class="marquee">
+          <span
+            >Jadwal kajian senin • Ust. Ahmad Jamaludin • Persiapan Menuju Bulan
+            Suci Ramadhan • Masjid Al-Barkah Siap Melayani Umat</span
+          >
         </div>
       </div>
     </div>
-
-    <!-- Hero & background -->
-    <section class="hero background">
-      <!-- countdown ramadhan -->
-      <div class="ramadhan">
-        <span id="ramadhanCountdown">Menuju Ramadhan</span>
-      </div>
-
-      <!-- countdown sholat terdekat -->
-      <div class="next-sholat">
-        <span id="nextPrayer">Isya</span>
-        <span id="nextCountdown">00:00:00</span>
-      </div>
-    </section>
-
-    <!-- Jadwal Sholat -->
-    <section class="jadwal">
-      <div class="jadwal-item">
-        <span class="label">Subuh</span>
-        <span class="time" id="subuh">--:--</span>
-      </div>
-
-      <div class="jadwal-item">
-        <span class="label">Syuruq</span>
-        <span class="time" id="syuruq">--:--</span>
-      </div>
-
-      <div class="jadwal-item">
-        <span class="label">Dzuhur</span>
-        <span class="time" id="dzuhur">--:--</span>
-      </div>
-
-      <div class="jadwal-item">
-        <span class="label">Ashar</span>
-        <span class="time" id="ashar">--:--</span>
-      </div>
-
-      <div class="jadwal-item">
-        <span class="label">Maghrib</span>
-        <span class="time" id="maghrib">--:--</span>
-      </div>
-
-      <div class="jadwal-item">
-        <span class="label">Isya</span>
-        <span class="time" id="isya">--:--</span>
-      </div>
-    </section>
-
-    <!-- Marquee -->
-    <marquee
-      class="marquee"
-      behavior="scroll"
-      direction="left"
-      scrollamount="6"
-    >
-      Jadwal kajian senin • Ust. Fikri • Persiapan Menuju Bulan Suci Ramadhan
-    </marquee>
 
     <script src="script.js"></script>
   </body>

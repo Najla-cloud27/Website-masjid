@@ -1,229 +1,285 @@
-:root {
-  --blue: #0d47a1;
-  --orange: #ff8f00;
-  --dark: #111;
-}
-
+/* Reset Dasar */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: black;
-  color: white;
-  overflow: hidden;
+  background: radial-gradient(circle at top, #1c1c1c, #0f0f0f);
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Header */
+/* Container Utama */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0f0f0f;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: background-image 1s ease-in-out; /* Efek halus saat ganti gambar */
+}
+
+/* Overlay Hitam Transparan agar tulisan terbaca */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* === HEADER === */
 .header {
-  background: var(--blue);
-  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 18px 24px;
+  margin: 0 16px;
+  background: linear-gradient(90deg, #1f1f1f, #262626);
+  border-radius: 0 0 40px 40px;
+  border-bottom: 2px solid rgba(255, 152, 0, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-.header-left {
+.masjid-info {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.logo {
-  font-size: 40px;
+/* UNTUK IKON MASJID */
+.mosque-icon {
+  font-size: 40px; /* Ukuran ikon */
+  color: #ffb74d; /* Warna oranye agar serasi */
+  margin-right: 10px; /* Jarak dengan teks */
+  filter: drop-shadow(
+    0 0 5px rgba(255, 152, 0, 0.5)
+  ); /* Efek bayangan bersinar */
 }
 
-.info-masjid h1 {
-  margin: 0;
-  font-size: 26px;
+.masjid-text h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
 }
 
-.info-masjid p {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.9;
+.masjid-text em {
+  font-size: 13px;
+  color: #ccc;
+  font-style: normal;
 }
 
-.header-right {
+/* === JAM DIGITAL === */
+.clock-box {
   text-align: right;
 }
 
-#clock {
-  font-size: 48px;
-  font-weight: bold;
-  color: var(--orange);
-  line-height: 1;
+.clock-frame {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 2px solid #ffb74d;
+  border-radius: 12px;
+  background: rgba(255, 152, 0, 0.1);
+  margin-bottom: 5px;
 }
 
-#date {
-  font-size: 14px;
-}
-
-/* Hero dan background */
-.hero {
-  position: relative;
-  height: 55vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* transition hero */
-.hero {
-  transition: background-image 1.5s ease-in-out;
-}
-
-/* overlay biar teks kebaca */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-}
-
-/* COUNTDOWN RAMADHAN  */
-.ramadhan {
-  position: absolute;
-  bottom: 15px;
-  left: 20px;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-/* COUNTDOWN SHOLAT */
-.next-sholat {
-  position: absolute;
-  bottom: 15px;
-  right: 20px;
-  z-index: 2;
-  background: var(--orange);
-  color: black;
-  padding: 10px 14px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
-}
-
-#nextPrayer {
-  font-size: 14px;
-}
-
-#nextCountdown {
-  font-size: 18px;
-}
-
-/* JADWAL SHOLAT  */
-.jadwal {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 14px;
-  padding: 16px 20px;
-  background: #0b0b0b;
-}
-
-.jadwal-item {
-  background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
-  border-radius: 14px;
-  padding: 14px 10px;
-  text-align: center;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
-}
-
-.jadwal-item .label {
-  font-size: 14px;
-  color: #fff;
-  margin-bottom: 6px;
-}
-
-.jadwal-item .time {
-  font-size: 30px;
-  font-weight: bold;
-  color: #ff8f00;
+.clock {
+  font-family: "Orbitron", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffb74d;
   letter-spacing: 2px;
 }
 
-/* Higlight solat yang aktif */
-.jadwal-item.active {
-  background: linear-gradient(180deg, #ff8f00, #d97706);
-  color: black;
-}
-
-.jadwal-item.active .time {
-  color: black;
-}
-
-/*MARQUEE */
-.marquee {
-  background: #111;
-  color: white;
-  padding: 10px 0;
+.date {
   font-size: 14px;
-  border-top: 2px solid var(--orange);
+  color: #e0e0e0;
+  line-height: 1.4;
 }
 
-/* Header / navbar atas */
-.top-bar {
-  margin: 20px;
-  padding: 18px 26px;
-  background: linear-gradient(180deg, #2b2b2b, #1a1a1a);
-  border-radius: 16px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.9);
-}
-
-/* LEFT */
-.top-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.mosque-icon {
-  font-size: 34px;
-  color: white;
-}
-
-.masjid-name {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.masjid-address {
-  font-size: 12px;
-  color: #cfcfcf;
+.date em {
+  display: block;
+  font-size: 13px;
+  color: #ff9800;
+  font-style: italic;
   margin-top: 2px;
 }
 
-/* RIGHT */
-.clock-box {
-  background: #111;
-  padding: 12px 20px;
-  border-radius: 12px;
+/* === HERO SECTION === */
+.hero {
+  flex: 1;
+  position: relative;
+  min-height: 300px;
+}
+
+/* Teks Hitung Mundur Ramadhan */
+.hero-text {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 0 20px 20px 0;
+  border-left: 4px solid #ff9800;
+  color: #fff;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Kotak Next Prayer */
+.next-prayer {
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  background: #ff9800;
+  padding: 0;
+  border-radius: 12px 0 0 12px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.next-prayer span {
+  padding: 10px 15px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.next-prayer strong {
+  font-family: "Orbitron", sans-serif;
+  font-size: 20px;
+  padding: 10px 15px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* === JADWAL SHOLAT GRID === */
+.prayer-times {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  padding: 0 20px 20px 20px;
+}
+
+.prayer,
+.prayer-satu,
+.prayer-dua {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 15px 10px;
   text-align: center;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#clock {
-  font-size: 34px;
-  font-weight: bold;
-  color: #ff8f00;
-  letter-spacing: 2px;
+/* Style Khusus Pinggiran Lengkung */
+.prayer-satu {
+  border-radius: 20px 10px 10px 20px;
+}
+.prayer {
+  border-radius: 10px;
+}
+.prayer-dua {
+  border-radius: 10px 20px 20px 10px;
 }
 
-#date {
-  font-size: 12px;
+/* Warna jika waktu sholat sedang aktif (dipanggil oleh JS) */
+.active-prayer {
+  background: rgba(255, 152, 0, 0.25) !important;
+  border: 1px solid #ff9800 !important;
+  box-shadow: 0 0 15px rgba(255, 152, 0, 0.3);
+}
+
+.prayer p,
+.prayer-satu p,
+.prayer-dua p {
+  font-size: 14px;
+  margin-bottom: 8px;
   color: #ddd;
-  margin-top: 6px;
-  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.prayer-frame {
+  display: inline-block;
+  padding: 8px 15px;
+  border: 1px solid #ff9800;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+.prayer-frame span {
+  font-family: "Orbitron", sans-serif;
+  font-size: 22px;
+  color: #ff9800;
+  font-weight: 700;
+}
+
+/* === FOOTER MARQUEE === */
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 10px 0;
+  overflow: hidden;
+  border-top: 1px solid #333;
+}
+
+.marquee {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollText 20s linear infinite;
+  font-size: 14px;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* === RESPONSIVE HP === */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+  }
+  .clock-box {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .prayer-times {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero {
+    min-height: 200px;
+  }
 }
