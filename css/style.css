@@ -1,4 +1,4 @@
-/* Reset Dasar */
+/* Reset awal biar tampilan konsisten di semua browser */
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +6,7 @@
 }
 
 body {
+  /* background utama halaman */
   background: radial-gradient(circle at top, #1c1c1c, #0f0f0f);
   color: #fff;
   font-family: "Inter", sans-serif;
@@ -13,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Container Utama */
+/* container utama yang membungkus semua isi */
 .container {
   width: 100%;
   min-height: 100vh;
@@ -24,10 +25,11 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: background-image 1s ease-in-out; /* Efek halus saat ganti gambar */
+  /* efek transisi kalau background ganti */
+  transition: background-image 1s ease-in-out;
 }
 
-/* Overlay Hitam Transparan agar tulisan terbaca */
+/* overlay hitam tipis supaya teks tetap kebaca */
 .container::before {
   content: "";
   position: absolute;
@@ -36,12 +38,13 @@ body {
   z-index: 0;
 }
 
+/* pastiin semua isi ada di atas overlay */
 .container > * {
   position: relative;
   z-index: 1;
 }
 
-/* === HEADER === */
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -54,22 +57,23 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+/* bagian kiri header (ikon + nama masjid) */
 .masjid-info {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* UNTUK IKON MASJID */
+/* icon masjid */
 .mosque-icon {
-  font-size: 40px; /* Ukuran ikon */
-  color: #ffb74d; /* Warna oranye agar serasi */
-  margin-right: 10px; /* Jarak dengan teks */
-  filter: drop-shadow(
-    0 0 5px rgba(255, 152, 0, 0.5)
-  ); /* Efek bayangan bersinar */
+  font-size: 40px;
+  color: #ffb74d;
+  margin-right: 10px;
+  /* efek glow tipis */
+  filter: drop-shadow(0 0 5px rgba(255, 152, 0, 0.5));
 }
 
+/* nama masjid */
 .masjid-text h1 {
   font-size: 24px;
   font-weight: 700;
@@ -77,17 +81,19 @@ body {
   margin-bottom: 4px;
 }
 
+/* alamat masjid */
 .masjid-text em {
   font-size: 13px;
   color: #ccc;
   font-style: normal;
 }
 
-/* === JAM DIGITAL === */
+/* Jam Digital */
 .clock-box {
   text-align: right;
 }
 
+/* bingkai jam */
 .clock-frame {
   display: inline-block;
   padding: 8px 20px;
@@ -97,6 +103,7 @@ body {
   margin-bottom: 5px;
 }
 
+/* tampilan angka jam */
 .clock {
   font-family: "Orbitron", sans-serif;
   font-size: 24px;
@@ -105,12 +112,14 @@ body {
   letter-spacing: 2px;
 }
 
+/* tanggal */
 .date {
   font-size: 14px;
   color: #e0e0e0;
   line-height: 1.4;
 }
 
+/* keterangan tambahan di tanggal */
 .date em {
   display: block;
   font-size: 13px;
@@ -119,14 +128,14 @@ body {
   margin-top: 2px;
 }
 
-/* === HERO SECTION === */
+/* Hero Section */
 .hero {
   flex: 1;
   position: relative;
   min-height: 300px;
 }
 
-/* Teks Hitung Mundur Ramadhan */
+/* teks hitung mundur ramadhan */
 .hero-text {
   position: absolute;
   bottom: 20px;
@@ -141,7 +150,7 @@ body {
   font-style: normal;
 }
 
-/* Kotak Next Prayer */
+/* kotak sholat berikutnya */
 .next-prayer {
   position: absolute;
   bottom: 20px;
@@ -154,6 +163,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* nama sholat */
 .next-prayer span {
   padding: 10px 15px;
   font-weight: 700;
@@ -162,6 +172,7 @@ body {
   border-right: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* countdown waktu sholat */
 .next-prayer strong {
   font-family: "Orbitron", sans-serif;
   font-size: 20px;
@@ -170,7 +181,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* === JADWAL SHOLAT GRID === */
+/* Grid Jadwal Sholat */
 .prayer-times {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -178,6 +189,7 @@ body {
   padding: 0 20px 20px 20px;
 }
 
+/* box jadwal sholat */
 .prayer,
 .prayer-satu,
 .prayer-dua {
@@ -188,7 +200,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Style Khusus Pinggiran Lengkung */
+/* bentuk sudut khusus kiri & kanan */
 .prayer-satu {
   border-radius: 20px 10px 10px 20px;
 }
@@ -199,13 +211,14 @@ body {
   border-radius: 10px 20px 20px 10px;
 }
 
-/* Warna jika waktu sholat sedang aktif (dipanggil oleh JS) */
+/* efek aktif saat waktu sholat (dipanggil dari JS) */
 .active-prayer {
   background: rgba(255, 152, 0, 0.25) !important;
   border: 1px solid #ff9800 !important;
   box-shadow: 0 0 15px rgba(255, 152, 0, 0.3);
 }
 
+/* nama sholat */
 .prayer p,
 .prayer-satu p,
 .prayer-dua p {
@@ -216,6 +229,7 @@ body {
   letter-spacing: 1px;
 }
 
+/* bingkai jam sholat */
 .prayer-frame {
   display: inline-block;
   padding: 8px 15px;
@@ -225,6 +239,7 @@ body {
   width: 100%;
 }
 
+/* angka jam sholat */
 .prayer-frame span {
   font-family: "Orbitron", sans-serif;
   font-size: 22px;
@@ -232,7 +247,7 @@ body {
   font-weight: 700;
 }
 
-/* === FOOTER MARQUEE === */
+/* Footer Marquee */
 .footer {
   background: #111;
   color: #fff;
@@ -241,6 +256,7 @@ body {
   border-top: 1px solid #333;
 }
 
+/* area teks berjalan */
 .marquee {
   width: 100%;
   white-space: nowrap;
@@ -254,6 +270,7 @@ body {
   font-size: 14px;
 }
 
+/* animasi teks berjalan */
 @keyframes scrollText {
   0% {
     transform: translateX(0);
@@ -263,13 +280,14 @@ body {
   }
 }
 
-/* === RESPONSIVE HP === */
+/* Responsive HP */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
     text-align: center;
     border-radius: 0 0 20px 20px;
   }
+
   .clock-box {
     text-align: center;
     margin-top: 10px;
@@ -281,5 +299,106 @@ body {
 
   .hero {
     min-height: 200px;
+  }
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  /* header: logo di atas, jam di bawah */
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 25px 20px;
+    height: auto;
+  }
+
+  .masjid-info {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .masjid-info i {
+    margin: 0 0 10px 0;
+  }
+
+  .masjid-text h1 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .clock-box {
+    text-align: center;
+    width: 100%;
+    margin-top: 5px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* hero: ditumpuk ke bawah biar rapi di hp */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    gap: 40px;
+    padding: 40px 20px;
+  }
+
+  /* teks ramadhan versi mobile */
+  .hero-text {
+    position: static;
+    width: 100%;
+    text-align: center;
+    border-left: none;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+  }
+
+  /* kotak sholat berikutnya versi mobile */
+  .next-prayer {
+    position: static;
+    width: 100%;
+    max-width: 350px;
+    justify-content: center;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+    margin: 0 auto;
+    z-index: 5;
+  }
+
+  /* grid jadwal sholat dirapihin */
+  .prayer-times {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 20px 100px 20px;
+  }
+
+  .prayer,
+  .prayer-satu,
+  .prayer-dua {
+    border-radius: 12px;
+    padding: 15px 5px;
+  }
+
+  .prayer p {
+    font-size: 13px;
+  }
+
+  .prayer-frame span {
+    font-size: 20px;
+  }
+
+  /* footer dipaku di bawah */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background: #000;
+    border-top: 1px solid #333;
   }
 }

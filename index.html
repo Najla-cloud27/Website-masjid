@@ -2,50 +2,68 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
+    <!-- bwaan dri code html shift tnda seru -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- judul halaman yang muncul di tab browser -->
     <title>Jadwal Sholat Masjid Al-Barkah</title>
 
+    <!-- font dari google, dipakai buat teks utama dan jam digital -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
 
+    <!-- icon dari font awesome (ikon masjid, dll) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
 
+    <!-- file css utama buat ngatur tampilan -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body>
+    <!-- container utama seluruh tampilan -->
     <div class="container">
+      <!-- bagian header (info masjid + jam) -->
       <div class="header">
         <div class="masjid-info">
+          <!-- icon masjid -->
           <i class="fa-solid fa-mosque mosque-icon"></i>
 
+          <!-- nama dan alamat masjid -->
           <div class="masjid-text">
             <h1>Masjid Al - Barkah</h1>
             <em>Jalan Pahlawan, Kampung Tengah, Belakang Polsek Cileungsi</em>
           </div>
         </div>
 
+        <!-- box jam digital -->
         <div class="clock-box">
           <div class="clock-frame">
+            <!-- jam realtime -->
             <div class="clock" id="clock">00 : 00 : 00</div>
           </div>
+          <!-- tanggal hari ini -->
           <div class="date" id="date">Memuat tanggal...</div>
         </div>
       </div>
 
+      <!-- bagian tengah (info tambahan & sholat berikutnya) -->
       <div class="hero">
+        <!-- countdown ramadhan -->
         <em class="hero-text" id="ramadhanCountdown"> Menghitung hari... </em>
 
+        <!-- info sholat terdekat -->
         <div class="next-prayer">
           <span id="nextPrayerName">--</span>
           <strong id="nextPrayerCountdown">-- : -- : --</strong>
         </div>
       </div>
 
+      <!-- daftar jadwal sholat -->
       <div class="prayer-times">
         <div class="prayer-satu">
           <p>Subuh</p>
@@ -53,30 +71,35 @@
             <span id="subuh">--:--</span>
           </div>
         </div>
+
         <div class="prayer">
           <p>Syuruq</p>
           <div class="prayer-frame">
             <span id="syuruq">--:--</span>
           </div>
         </div>
+
         <div class="prayer">
           <p>Dzuhur</p>
           <div class="prayer-frame">
             <span id="dzuhur">--:--</span>
           </div>
         </div>
+
         <div class="prayer">
           <p>Ashar</p>
           <div class="prayer-frame">
             <span id="asar">--:--</span>
           </div>
         </div>
+
         <div class="prayer">
           <p>Maghrib</p>
           <div class="prayer-frame">
             <span id="maghrib">--:--</span>
           </div>
         </div>
+
         <div class="prayer-dua">
           <p>Isya</p>
           <div class="prayer-frame">
@@ -85,16 +108,18 @@
         </div>
       </div>
 
+      <!-- footer berjalan (info kajian & pengumuman) -->
       <div class="footer">
         <div class="marquee">
-          <span
-            >Jadwal kajian senin • Ust. Ahmad Jamaludin • Persiapan Menuju Bulan
-            Suci Ramadhan • Masjid Al-Barkah Siap Melayani Umat</span
-          >
+          <span>
+            Jadwal kajian senin • Ust. Ahmad Jamaludin • Persiapan Menuju Bulan
+            Suci Ramadhan • Masjid Al-Barkah Siap Melayani Umat
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- file javascript utama -->
     <script src="script.js"></script>
   </body>
 </html>

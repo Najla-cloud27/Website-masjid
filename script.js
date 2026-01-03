@@ -1,15 +1,16 @@
-/*KONFIGURASI*/
-// Mengambil gambar dari folder 'images' kamu
+/*BAGIAN KONFIGURASI*/
+// daftar gambar background yang ada di folder images
 const backgrounds = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
 
+// lokasi yang dipakai buat ambil jadwal sholat dari API
 const city = "Jonggol";
 const country = "Indonesia";
 
-/*1. JAM & TANGGAL */
+/* 1. JAM & TANGGAL */
 function updateDateTime() {
   const now = new Date();
 
-  // Jam Digital
+  // update jam digital realtime
   document.getElementById("clock").innerText = now
     .toLocaleTimeString("id-ID", {
       hour: "2-digit",
@@ -18,7 +19,7 @@ function updateDateTime() {
     })
     .replace(/\./g, " : ");
 
-  // Tanggal Masehi
+  // format tanggal masehi (hari, tanggal, bulan, tahun)
   const dateMasehi = now.toLocaleDateString("id-ID", {
     weekday: "long",
     day: "numeric",
@@ -26,35 +27,38 @@ function updateDateTime() {
     year: "numeric",
   });
 
-  // Tanggal Hijriah
+  // ambil tanggal hijriah
   const hijriDate = new Intl.DateTimeFormat("id-ID-u-ca-islamic-umalqura", {
     day: "numeric",
     month: "long",
     year: "numeric",
   }).format(now);
 
+  // tampilkan tanggal masehi + hijriah ke halaman
   document.getElementById(
     "date"
   ).innerHTML = `${dateMasehi}<br><em>${hijriDate} H</em>`;
 }
+
+// update jam tiap 1 detik
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
-/*  2. BACKGROUND SLIDESHOW*/
+/* 2. BACKGROUND SLIDESHOW */
 let bgIndex = 0;
 const container = document.querySelector(".container");
 
 function changeBackground() {
-  // Memastikan path gambar benar
+  // ganti background sesuai urutan array
   container.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
   bgIndex = (bgIndex + 1) % backgrounds.length;
 }
-setInterval(changeBackground, 10000); // Ganti tiap 10 detik
+
+// ganti background tiap 10 detik
+setInterval(changeBackground, 10000);
 changeBackground();
 
-/* =====================
-   3. JADWAL SHOLAT (API)
-====================== */
+/* 3. JADWAL SHOLAT (API) */
 async function loadPrayerTimes() {
   try {
     const now = new Date();
@@ -62,13 +66,14 @@ async function loadPrayerTimes() {
       now.getMonth() + 1
     }-${now.getFullYear()}`;
 
+    // request ke API Aladhan untuk ambil jadwal sholat
     const response = await fetch(
       `https://api.aladhan.com/v1/timingsByCity/${dateStr}?city=${city}&country=${country}&method=20`
     );
     const data = await response.json();
     const t = data.data.timings;
 
-    // Tampilkan Jadwal
+    // mapping jadwal ke id HTML
     const jadwal = {
       subuh: t.Fajr,
       syuruq: t.Sunrise,
@@ -78,24 +83,29 @@ async function loadPrayerTimes() {
       isya: t.Isha,
     };
 
+    // tampilkan jam sholat ke halaman
     for (let key in jadwal) {
       document.getElementById(key).innerText = jadwal[key];
     }
 
+    // jalankan countdown dan highlight waktu aktif
     startNextPrayerCountdown(t);
-    highlightCurrentPrayer(jadwal); // Fitur highlight aktif
+    highlightCurrentPrayer(jadwal);
   } catch (error) {
+    // kalau API error / tidak konek
     console.error("Gagal koneksi:", error);
   }
 }
 loadPrayerTimes();
 
-/* =====================
-   4. COUNTDOWN SHOLAT
-====================== */
+/* 4. COUNTDOWN SHOLAT */
+// Bandingin jam sekarang sama jadwal sholat,
+// ambil yang paling dekat tapi belum lewat, terus hitung selisih waktunya.”
 function startNextPrayerCountdown(timings) {
   function updateCountdown() {
     const now = new Date();
+
+    // daftar waktu sholat yang akan dicek
     const prayers = [
       { name: "Subuh", time: timings.Fajr },
       { name: "Syuruq", time: timings.Sunrise },
@@ -108,10 +118,12 @@ function startNextPrayerCountdown(timings) {
     let target = null;
     let targetTime = null;
 
+    // cari sholat terdekat yang belum lewat
     for (let p of prayers) {
       const [h, m] = p.time.split(":");
       const pTime = new Date();
       pTime.setHours(h, m, 0, 0);
+
       if (pTime > now) {
         target = p.name;
         targetTime = pTime;
@@ -119,6 +131,7 @@ function startNextPrayerCountdown(timings) {
       }
     }
 
+    // kalau semua sudah lewat, arahkan ke subuh besok
     if (!target) {
       target = "Subuh";
       const [h, m] = timings.Fajr.split(":");
@@ -127,11 +140,13 @@ function startNextPrayerCountdown(timings) {
       targetTime.setHours(h, m, 0, 0);
     }
 
+    // hitung selisih waktu
     const diff = targetTime - now;
     const hLeft = Math.floor(diff / 3600000);
     const mLeft = Math.floor((diff % 3600000) / 60000);
     const sLeft = Math.floor((diff % 60000) / 1000);
 
+    // tampilkan countdown ke halaman
     document.getElementById("nextPrayerName").innerText = target;
     document.getElementById("nextPrayerCountdown").innerText = `${String(
       hLeft
@@ -139,21 +154,22 @@ function startNextPrayerCountdown(timings) {
       sLeft
     ).padStart(2, "0")}`;
   }
+
+  // update countdown tiap detik
   setInterval(updateCountdown, 1000);
   updateCountdown();
 }
 
-/* =====================
-   5. HIGHLIGHT WAKTU AKTIF
-====================== */
+/* 5. HIGHLIGHT WAKTU AKTIF */
 function highlightCurrentPrayer(jadwal) {
   const now = new Date();
-  // Hapus kelas aktif sebelumnya
+
+  // hapus highlight sebelumnya
   document
     .querySelectorAll(".prayer, .prayer-satu, .prayer-dua")
     .forEach((el) => el.classList.remove("active-prayer"));
 
-  // Logika sederhana: Cari waktu yg paling dekat yang SUDAH lewat
+  // mapping waktu sholat untuk dicek satu-satu
   let current = null;
   const timeMap = {
     subuh: jadwal.subuh,
@@ -164,6 +180,7 @@ function highlightCurrentPrayer(jadwal) {
     isya: jadwal.isya,
   };
 
+  // cek waktu terakhir yang sudah lewat
   for (let key in timeMap) {
     const [h, m] = timeMap[key].split(":");
     const pTime = new Date();
@@ -174,27 +191,30 @@ function highlightCurrentPrayer(jadwal) {
     }
   }
 
-  // Jika ada waktu aktif, tambahkan class highlight
+  // kalau ketemu, kasih highlight di kotaknya
   if (current) {
     const el = document.getElementById(current);
     if (el) {
-      // Naik 2 level ke parent (div class="prayer...")
       el.parentElement.parentElement.classList.add("active-prayer");
     }
   }
 }
 
-/* =====================
-   6. COUNTDOWN RAMADHAN
-====================== */
+/* 6. COUNTDOWN RAMADHAN */
 function updateRamadhan() {
   const ramadhanDate = new Date("2026-03-18");
   const now = new Date();
+
+  // hitung sisa hari menuju ramadhan
   const diff = ramadhanDate - now;
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
   const textEl = document.getElementById("ramadhanCountdown");
-  if (days > 0) textEl.innerText = `${days} Hari Menuju Bulan Suci Ramadhan`;
-  else textEl.innerText = "Ramadhan Telah Tiba!";
+
+  if (days > 0) {
+    textEl.innerText = `${days} Hari Menuju Bulan Suci Ramadhan`;
+  } else {
+    textEl.innerText = "Ramadhan Telah Tiba!";
+  }
 }
 updateRamadhan();
